@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+
+    
+    <link rel="stylesheet" href={% static 'style.css'%}>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Television Sales - Order List</h1>
+        </div>
+    </header>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                    <th>Product ID</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.client_name }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.telephone }}</td>
+                    <td>{{ order.email }}</td>
+                    <td>{{ order.product_id }}</td>
+                    <td>{{ order.qte }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        <a href="{% url 'edit_order' order.id %}" class="btn">Edit</a>
+                        <a href="{% url 'delete_order' order.id %}" class="btn">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

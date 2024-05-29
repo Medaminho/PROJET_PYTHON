@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Vente des Téléviseurs</title>
+    <link rel="stylesheet" href={% static 'style.css'%}>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <h1>Gestion de Vente des Téléviseurs</h1>
+            <ul>
+                
+                <li><a href="#televisions">Téléviseurs</a></li>
+                <li><a href="#orders">Commandes</a></li>
+
+                {%if request.user.is_superuser%}
+                    <li><a href="#signup">Inscription</a></li>
+                    
+                {%endif%}
+
+                {%if request.user.is_authenticated%}
+                <li><a href="#login">{{request.user.username}}</a></li>
+                <li><a href={%url 'logout'%}>Logout</a></li>
+
+                {%endif%}
+
+                
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page d'accueil : Login -->
+    <section id="login" class="section">
+        <div class="form-container">
+            <h2>Login</h2>
+            <form action="login" method="post">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Liste des téléviseurs -->
+    <section id="televisions" class="section">
+        <div class="table-container">
+            <h2>Liste des Téléviseurs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemple de téléviseur -->
+                    <tr>
+                        <td>1</td>
+                        <td>TV Samsung</td>
+                        <td>10</td>
+                        <td>500€</td>
+                        <td>
+                            <button class="btn btn-edit">Modifier</button>
+                            <button class="btn btn-delete">Supprimer</button>
+                        </td>
+                    </tr>
+                    <!-- Ajout d'un nouveau téléviseur -->
+                    <tr class="new-item">
+                        <td></td>
+                        <td><input type="text" placeholder="Nom"></td>
+                        <td><input type="number" placeholder="Quantité"></td>
+                        <td><input type="text" placeholder="Prix"></td>
+                        <td><button class="btn btn-add">Ajouter</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Liste des commandes -->
+    <section id="orders" class="section">
+        <div class="table-container">
+            <h2>Liste des Commandes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Adresse</th>
+                        <th>Téléphone</th>
+                        <th>Référence</th>
+                        <th>Quantité</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemple de commande -->
+                    <tr>
+                        <td>Jean Dupont</td>
+                        <td>123 Rue Principale</td>
+                        <td>0123456789</td>
+                        <td>TV123</td>
+                        <td>2</td>
+                        <td>Pending</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Order d'inscription -->
+    <section id="signup" class="section">
+        <div class="form-container">
+            <h2>Inscription</h2>
+            <form action="signup" method="post">
+                <label for="signup-name">Nom</label>
+                <input type="text" id="signup-name" name="name" required>
+                
+                <label for="signup-address">Adresse</label>
+                <input type="text" id="signup-address" name="address" required>
+                
+                <label for="signup-phone">Téléphone</label>
+                <input type="text" id="signup-phone" name="phone" required>
+                
+                <label for="signup-reference">Référence</label>
+                <input type="text" id="signup-reference" name="reference" required>
+                
+                <label for="signup-quantity">Quantité</label>
+                <input type="number" id="signup-quantity" name="quantity" required>
+                
+                <label for="signup-status">Status</label>
+                <select id="signup-status" name="status" required>
+                    <option value="rejected">Rejected</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmer">Confirmer</option>
+                </select>
+                
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

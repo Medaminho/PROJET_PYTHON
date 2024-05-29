@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Signup</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Television Sales - Signup</h1>
+        </div>
+    </header>
+    <div class="container">
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+            <label for="password2">Confirm Password</label>
+            <input type="password" name="password2" id="password2" required>
+            <input type="submit" value="Signup" class="btn">
+        </form>
+    </div>
+</body>
+</html>

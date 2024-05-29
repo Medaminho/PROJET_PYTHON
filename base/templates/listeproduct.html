@@ -1,0 +1,50 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href={% static 'style.css'%}>
+    <title>Television List</title>
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Television Sales - Television List</h1>
+        </div>
+    </header>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tv in tvs %}
+                <tr>
+                    <td>{{ tv.id }}</td>
+                    <td>{{ tv.title }}</td>
+                    <td>{{ tv.qte }}</td>
+                    <td>{{ tv.prix}}</td>
+                    <td>
+                        <a href="{% url 'edit_tv' tv.id %}" class="btn">Edit</a>
+                        <a href="{% url 'delete_tv' tv.id %}" class="btn">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+    </div>
+</body>
+</html>
